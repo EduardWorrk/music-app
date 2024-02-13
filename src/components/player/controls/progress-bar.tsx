@@ -33,7 +33,7 @@ export const ProgressBar: FC<Props> = ({ audioRef }) => {
   const progress = Math.floor((currentTime / duration) * Number(elementWidth));
 
   const handleSeek = (e: MouseEvent<HTMLDivElement>) => {
-    if (audioRef.current && audioRef.current.duration) { v
+    if (audioRef.current && audioRef.current.duration) {
       const rect = e.currentTarget.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickProgress = (clickX / rect.width) * 100;
