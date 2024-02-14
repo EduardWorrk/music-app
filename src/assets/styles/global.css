@@ -27,7 +27,7 @@ button {
 
 /* Стилизация скролла для Mozilla Firefox */
 html, body {
-  scrollbar-color: black #714826;     /* «цвет ползунка» | «цвет полосы скроллбара» */
+  scrollbar-color: black #252525;     /* «цвет ползунка» | «цвет полосы скроллбара» */
   scrollbar-width: auto;  /* толщина: auto | thin | none */
 }
 
