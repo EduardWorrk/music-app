@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('../fonts/Inter-Regular.ttf') format('ttf')
+}
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('../fonts/Inter-Medium.ttf') format('ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('../fonts/Inter-ExtraBold.ttf') format('ttf');
+  font-weight: 700;
+}
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+
+/* Стилизация скролла для Mozilla Firefox */
+html, body {
+  scrollbar-color: black #252525;     /* «цвет ползунка» | «цвет полосы скроллбара» */
+  scrollbar-width: auto;  /* толщина: auto | thin | none */
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #8d8d8d;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #4f4f4f;
+}

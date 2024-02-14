@@ -1,0 +1,5 @@
+node_modules/*
+public/*
+src/lib/utils/crypto.ts
+src/stories/*
+src/ui-kit/*
