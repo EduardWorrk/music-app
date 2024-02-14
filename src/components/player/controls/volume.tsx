@@ -1,5 +1,5 @@
 import { FC, RefObject, useEffect, useState } from "react";
-import { Box, ClickAwayListener, Slider } from "@mui/material";
+import { Box, ClickAwayListener } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import IconButton from "@mui/material/IconButton";
 import {

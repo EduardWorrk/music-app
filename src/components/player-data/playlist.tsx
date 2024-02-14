@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/store";
 import { ListTracks } from "@components/list-tracks";
@@ -6,7 +6,10 @@ import { Box, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { clearAlbum } from "@store/slices/album";
-import { setOpenPlaylist } from "@store/slices/playlists";
+import { deletePlaylist, setOpenPlaylist } from "@store/slices/playlists";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Theme } from "@mui/material/styles/createTheme";
+import { DeleteModal } from "@components/delete-modal";
 
 const boxStyles = {
   overflow: "auto",
@@ -22,8 +25,14 @@ const buttonGroupStyles = {
   width: "100%",
 };
 
+const iconButtonStyle = {
+  color: (theme: Theme) => theme.palette.grey[700],
+};
+
 export const PlayerDataPlaylist: FC = () => {
   const dispatch = useDispatch();
+
+  const [openModal, setOpenModal] = useState(false);
 
   const { current: playlist } = useSelector(
     (state: RootState) => state.playlists
@@ -33,6 +42,13 @@ export const PlayerDataPlaylist: FC = () => {
     dispatch(setOpenPlaylist(false));
     dispatch(clearAlbum());
   };
+
+  const onDeletePlaylist = () => {
+    dispatch(deletePlaylist(playlist?.id));
+    setOpenModal(false);
+    closePlaylist();
+  };
+
   return (
     <Box sx={boxStyles}>
       <Box>
@@ -41,9 +57,15 @@ export const PlayerDataPlaylist: FC = () => {
             Плейлист
           </Typography>
 
-          <IconButton onClick={closePlaylist} size="small">
-            <CloseIcon sx={{ color: (theme) => theme.palette.grey[700] }} />
-          </IconButton>
+          <Box>
+            <IconButton onClick={() => setOpenModal(true)}>
+              <DeleteIcon sx={iconButtonStyle} />
+            </IconButton>
+
+            <IconButton onClick={closePlaylist} size="small">
+              <CloseIcon sx={iconButtonStyle} />
+            </IconButton>
+          </Box>
         </Box>
 
         <Typography color="white" variant="caption">
@@ -52,6 +74,14 @@ export const PlayerDataPlaylist: FC = () => {
       </Box>
 
       <ListTracks tracks={playlist?.tracks} />
+
+      <DeleteModal
+        open={openModal}
+        title="Удаление плейлиста"
+        description="Вы действительно хотите удалить плейлист?"
+        onDelete={onDeletePlaylist}
+        onClose={() => setOpenModal(false)}
+      />
     </Box>
   );
 };

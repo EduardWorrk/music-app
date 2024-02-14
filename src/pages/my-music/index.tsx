@@ -43,8 +43,6 @@ export const MyMusicPage: FC = () => {
     dispatch(setOpenPlaylist(true));
   };
 
-  const selectPlayList =
-
   useEffect(() => {
     playlistStore && createNewPlaylist();
   }, [createNewPlaylist, playlistStore]);

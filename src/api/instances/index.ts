@@ -13,8 +13,6 @@ export const axiosAuthInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    const token = localStorage.getItem("Authorization");
-
     config.params = {
       client_id: "94607ffa",
       format: "json",

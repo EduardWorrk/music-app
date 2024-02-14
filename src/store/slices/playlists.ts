@@ -43,6 +43,16 @@ const playlists = createSlice({
     setCurrentPlayList: (state, action) => {
       state.current = action.payload;
     },
+
+    deletePlaylist: (state, action) => {
+      state.list = state.list.filter(
+        (playlist) => playlist.id !== action.payload
+      );
+
+      if (state.current && state.current.id === action.payload) {
+        state.current = null;
+      }
+    },
   },
 });
 
@@ -51,5 +61,6 @@ export const {
   createPlayList,
   setPlaylists,
   setCurrentPlayList,
+  deletePlaylist,
 } = playlists.actions;
 export const playlistSlice = playlists.reducer;
