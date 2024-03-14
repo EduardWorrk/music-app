@@ -56,6 +56,8 @@ export const HomePage = () => {
     [navigate]
   );
 
+  console.log(tracksWeek);
+
   return (
     <Stack spacing={3}>
       <Slider

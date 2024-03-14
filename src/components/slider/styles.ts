@@ -14,6 +14,8 @@ export const SSliderItem = styled(Box)(({ theme }) => ({
   pb: theme.spacing(2),
   background: "#1E1E1E",
   borderRadius: 5,
+  // width: widthS,
+  // minWidth: widthS,
 
   "&:hover": {
     border: `2px solid ${theme.palette.primary.main}`,

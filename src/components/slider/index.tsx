@@ -97,6 +97,7 @@ export const Slider: FC<Props> = ({
                     onClick={() => onCallBack(Number(item.id))}
                   >
                     {showName && <Box>{item.name}</Box>}
+
                     <img
                       style={{ width: "100%", height: "100%" }}
                       src={item.image}
