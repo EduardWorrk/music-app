@@ -19,6 +19,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import { addTrackToPlaylist, removeLikeTrack } from "@utils/track";
 
 export type TListTrack = Pick<TTrack, "id" | "name" | "audio" | "duration"> & {
+  index?: number;
   artist_name?: TTrack["artist_name"];
   artist_id?: TTrack["artist_id"];
   positionTrack?: number;
@@ -44,6 +45,7 @@ export const Track: FC<TListTrack> = ({
   onTogglePlay,
   positionTrack,
   artist_id,
+  index,
 }) => {
   const dispatch = useDispatch();
   const playerState = useSelector((state: RootState) => state.player);
@@ -70,7 +72,12 @@ export const Track: FC<TListTrack> = ({
 
   return (
     <STrack disablePadding>
-      <Box sx={{ display: "flex" }}>
+      <Box alignItems="center" sx={{ display: "flex" }}>
+        {index && (
+          <Box fontSize={12} color="white" sx={{ pr: 1 }}>
+            {index}
+          </Box>
+        )}
         {playerState.options.id === id && playerState.options.play ? (
           <SPlay onClick={onPause}>
             <PauseIcon {...iconStyle} />

@@ -1,8 +1,5 @@
-import { ChangeEvent, FC, useEffect, useRef } from "react";
-import { StyleSearch } from "@components/layout-main/search/styles";
-import { Box } from "@mui/material";
-import { IconSearch } from "@components/icons";
-import { debounce, removeSlash } from "@utils/index";
+import { ChangeEvent, FC, useEffect, useState } from "react";
+import { removeSlash } from "@utils/index";
 import { useMutation } from "@tanstack/react-query";
 import { tracksApi } from "@api/track";
 import { albumsApi } from "@api/albums";
@@ -16,12 +13,16 @@ import {
 } from "@store/slices/search";
 import { useLocation, useNavigate } from "react-router";
 import { routes } from "@constants/routes";
+import { useDebounce } from "@hooks/debounce";
+import { InputSearch } from "@components/ui/input-search";
 
 export const Search: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const ref = useRef<HTMLDivElement | null>(null);
+
+  const [value, setValue] = useState("");
+  const debouncedValue = useDebounce(value, 1500);
 
   const searchTrack = useMutation({
     mutationFn: tracksApi.getTracks,
@@ -50,23 +51,27 @@ export const Search: FC = () => {
 
   const loadingAll = loadingAlbum && loadingTrack && loadingArtist;
 
-  const handleSearchChange = debounce(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const nameSearch = event.target.value;
-      const fullCount = true;
-      const limit = 50;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchValue = event.target.value;
+    setValue(searchValue);
+  };
 
-      const data = { nameSearch, fullCount, limit };
+  useEffect(() => {
+    const fullCount = true;
+    const limit = 50;
 
-      if (nameSearch) {
-        searchTrack.mutate(data);
-        searchAlbum.mutate(data);
-        searchArtist.mutate(data);
-        dispatch(setLoading(true));
-      }
-    },
-    1500
-  );
+    const data = { name: value, fullCount, limit };
+
+    if (!value) {
+      return;
+    }
+    searchTrack.mutate(data);
+    searchAlbum.mutate(data);
+    searchArtist.mutate(data);
+
+    dispatch(setLoading(true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedValue]);
 
   useEffect(() => {
     if (removeSlash(pathname) !== `${routes.search}`) {
@@ -83,16 +88,15 @@ export const Search: FC = () => {
     }
   }, [dispatch, loadingAll, navigate]);
 
+  const handleClearValue = () => {
+    setValue("");
+  };
+
   return (
-    <StyleSearch
-      ref={ref}
-      onChange={handleSearchChange}
-      startAdornment={
-        <Box sx={{ pl: 3 }}>
-          <IconSearch />
-        </Box>
-      }
-      placeholder="Трек, альбом, исполнитель"
+    <InputSearch
+      value={value}
+      onClear={handleClearValue}
+      onChange={handleChange}
     />
   );
 };

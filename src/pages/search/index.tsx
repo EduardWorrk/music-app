@@ -52,7 +52,7 @@ export const SearchPage: FC = () => {
       ) : (
         <Stack spacing={8}>
           {hasElements(tracks) && (
-            <ListTracks title="Список найденных треков" tracks={tracks} />
+            <ListTracks index title="Список найденных треков" tracks={tracks} />
           )}
 
           {hasElements(albums) && (
