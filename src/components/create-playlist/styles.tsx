@@ -6,7 +6,6 @@ export const StylesCreatePlaylist = styled(
   {}
 )(({ theme }) => ({
   padding: theme.spacing(1),
-  margin: theme.spacing(3),
   borderRadius: 10,
 }));
 
@@ -14,8 +13,8 @@ export const StylesButton = styled(Box)(({ theme }) => ({
   borderRadius: 3,
   textAlign: "center",
   cursor: "pointer",
-  color: "white",
-  padding: theme.spacing(0.5),
-  border: `1px solid ${theme.palette.grey[700]}`,
+  color: theme.palette.grey[600],
+  padding: theme.spacing(1),
+  border: `1px solid ${theme.palette.grey[600]}`,
   fontSize: 14,
 }));

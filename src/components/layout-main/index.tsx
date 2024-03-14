@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 
 import { Header } from "@components/layout-main/header";
-import { Sidebar } from "@components/layout-main/sidebar";
 import { Content } from "@components/layout-main/content";
 import { Player } from "@components/player";
 import { useSelector } from "react-redux";
@@ -22,11 +21,12 @@ type Props = {
 export const LayoutMain: React.FC<Props> = ({ children }) => {
   const { options } = useSelector((state: RootState) => state.player);
   return (
-    <Stack direction="column">
+    <Stack
+      sx={{ maxWidth: 1440, margin: "0 auto", position: "relative" }}
+      direction="column"
+    >
       <Box>
         <Header />
-
-        <Sidebar />
 
         <Content fullScreen={!!options.id}>{children}</Content>
       </Box>

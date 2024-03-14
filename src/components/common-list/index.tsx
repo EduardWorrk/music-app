@@ -64,10 +64,10 @@ export const CommonList: FC<Props<TCommonList[]>> = ({
           return (
             <Grid
               item
-              key={elem.id}
               lg={3}
-              sm={12}
               md={6}
+              sm={12}
+              key={elem.id}
               sx={{ minHeight: 204 }}
             >
               <StyledItemList

@@ -19,7 +19,6 @@ const boxStyles = {
 };
 
 const buttonGroupStyles = {
-  mt: 2,
   display: "flex",
   justifyContent: "space-between",
   width: "100%",

@@ -3,10 +3,9 @@ import { Box } from "@mui/material";
 
 export const SContent = styled("main")<{ fullScreen: boolean }>(
   ({ theme, fullScreen }) => ({
-    padding: theme.spacing(8, 0, 0, 35),
     background: "#121212",
-    borderLeft: `1px solid ${theme.palette.grey[800]}`,
-    height: fullScreen ? "calc(100vh - 90px)" : "100vh",
+    // height: fullScreen ? "calc(100vh - 90px)" : "100vh",
+    height: "calc(100vh - 78px)",
     display: "grid",
     gridTemplateColumns: "1fr 32%",
   })

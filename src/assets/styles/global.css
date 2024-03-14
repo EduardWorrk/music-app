@@ -24,6 +24,10 @@ button {
   cursor: pointer;
 }
 
+#root {
+  background: black;
+}
+
 
 /* Стилизация скролла для Mozilla Firefox */
 html, body {

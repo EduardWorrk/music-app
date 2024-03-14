@@ -10,6 +10,8 @@ export const SPlayer = styled(Box)(({ theme }) => ({
   height: "90px",
   width: "100%",
   zIndex: 1201,
+  position: "absolute",
+  bottom: 0,
 }));
 export const SOpenVolume = styled(Box)<{ open: boolean }>(
   ({ theme, open }) => ({

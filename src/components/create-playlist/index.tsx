@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Stack, Typography } from "@mui/material";
 import {
   StylesButton,
   StylesCreatePlaylist,
@@ -19,16 +18,9 @@ export const CreatePlaylist: FC = () => {
 
   return (
     <StylesCreatePlaylist>
-      <Stack spacing={1}>
-        <Typography
-          color={(theme) => theme.palette.grey[500]}
-          variant="subtitle1"
-          fontSize={14}
-        >
-          Создай свой плейлист
-        </Typography>
-        <StylesButton onClick={createNewPlaylist}>Создать</StylesButton>
-      </Stack>
+      <StylesButton onClick={createNewPlaylist}>
+        Создай свой плейлист
+      </StylesButton>
     </StylesCreatePlaylist>
   );
 };
