@@ -48,13 +48,10 @@ export const ListTracks: FC<Props> = ({ title, tracks, index }) => {
               positionTrack={Number(i)}
             />
           ))}
-          )
         </>
       ) : (
         <Loading verticalSize={8} />
       )}
-
-      <List />
     </SListTrack>
   );
 };

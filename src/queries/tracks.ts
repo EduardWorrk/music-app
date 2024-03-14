@@ -5,6 +5,7 @@ export const useGetTracks = (params: TTrackParams, key?: string) => {
   return useQuery({
     queryKey: [params.boost] || key,
     queryFn: async () => await tracksApi.getTracks(params),
+    enabled: !!params.id,
   });
 };
 

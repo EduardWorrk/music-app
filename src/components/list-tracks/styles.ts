@@ -23,7 +23,7 @@ export const STitleTrack = styled(Link)(({ theme }) => ({
   },
 }));
 
-export const STrack = styled(ListItem)(({ theme }) => ({
+export const STrack = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "space-between",

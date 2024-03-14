@@ -71,7 +71,7 @@ export const Track: FC<TListTrack> = ({
   const removeTrack = () => removeLikeTrack(list, current, obj.id, dispatch);
 
   return (
-    <STrack disablePadding>
+    <STrack>
       <Box alignItems="center" sx={{ display: "flex" }}>
         {index && (
           <Box fontSize={12} color="white" sx={{ pr: 1 }}>

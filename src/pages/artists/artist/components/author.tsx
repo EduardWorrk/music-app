@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import { Avatar, Skeleton, Stack, Typography } from "@mui/material";
+import { AVATAR_SIZE } from "@utils/index";
 
 type Props = {
   img: string;
   name: string;
   loading: boolean;
 };
-
-const AVATAR_SIZE = { width: 150, height: 150 };
 
 export const Author: FC<Props> = ({ img, name, loading }) => {
   return (

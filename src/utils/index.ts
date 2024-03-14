@@ -1,3 +1,5 @@
+export const AVATAR_SIZE = { width: 150, height: 150 };
+
 // убрать слэш
 export const removeSlash = (str: string): string => {
   return str.slice(1);
