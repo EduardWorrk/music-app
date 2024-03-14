@@ -43,9 +43,12 @@ export const SearchPage: FC = () => {
     [navigate]
   );
 
+  const isNonResults =
+    !loading && [albums, tracks, artists].every((arr) => arr.length === 0);
+
   return (
     <>
-      {loading ? (
+      {isNonResults ? (
         <Typography variant="h3" color="white">
           Нет совпадений
         </Typography>
