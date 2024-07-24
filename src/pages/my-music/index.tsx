@@ -9,6 +9,7 @@ import {
   setCurrentPlayList,
   setOpenPlaylist,
   setPlaylists,
+  TPlaylist,
 } from "@store/slices/playlists";
 import { clearAlbum } from "@store/slices/album";
 import { getPlaylist } from "@utils/track";
@@ -21,11 +22,13 @@ export const MyMusicPage: FC = () => {
   );
 
   const createNewPlaylist = useCallback(() => {
+    const isActivePlaylist = list.some((elem) => elem?.active);
     const playlist = getPlaylist(
       `Новый плейлист № ${list.length + 1}`,
       [],
       undefined,
-      generatePastelColor()
+      generatePastelColor(),
+      list.length === 0 ? true : !isActivePlaylist
     );
 
     dispatch(setPlaylists([playlist, ...list]));
@@ -36,9 +39,19 @@ export const MyMusicPage: FC = () => {
 
   const selectPlaylist = (id: number) => {
     const selectedPlaylist = list.find(
-      (playlist) => Number(playlist.id) === id
+      (playlist) => Number(playlist?.id) === id
     );
-    dispatch(setCurrentPlayList(selectedPlaylist));
+
+    const playlists = list.map((playlist: TPlaylist) => {
+      if (playlist?.id === selectedPlaylist?.id) {
+        return { ...playlist, active: true };
+      }
+      return { ...playlist, active: false };
+    });
+
+    dispatch(setPlaylists(playlists));
+
+    dispatch(setCurrentPlayList({ active: true, ...selectedPlaylist }));
     dispatch(clearAlbum());
     dispatch(setOpenPlaylist(true));
   };

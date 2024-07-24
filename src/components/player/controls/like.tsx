@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { Box } from "@mui/material";
-import { addTrackToPlaylist, removeLikeTrack } from "@utils/track";
+import { removeLikeTrack } from "@utils/track";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/store";
 import { iconStyle, styleBox } from "@components/player/utils";
@@ -15,7 +15,7 @@ export const Like: FC = () => {
 
   const { current, list } = useSelector((state: RootState) => state.playlists);
 
-  const addTrack = () => addTrackToPlaylist(list, current, options, dispatch);
+  const addTrack = () => {};
 
   const removeTrack = () =>
     removeLikeTrack(list, current, options.id, dispatch);

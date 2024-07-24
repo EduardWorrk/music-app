@@ -1,22 +1,23 @@
 import React, { FC, useMemo } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { getMinutes, trimText } from "@utils/index";
-import { Theme } from "@mui/material/styles/createTheme";
+
 import {
+  iconStyle,
   SPlay,
   STextAuthor,
   STitleTrack,
   STrack,
+  textColor,
 } from "@components/list-tracks/styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@store/store";
 import { TTogglePlay } from "@components/list-tracks/index";
 import { TTrack } from "@declarations/tracks";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import { addTrackToPlaylist, removeLikeTrack } from "@utils/track";
+import { AddLike } from "@components/list-tracks/add-like";
+import { RemoveLike } from "@components/list-tracks/remove-like";
 
 export type TListTrack = Pick<TTrack, "id" | "name" | "audio" | "duration"> & {
   index?: number;
@@ -24,16 +25,6 @@ export type TListTrack = Pick<TTrack, "id" | "name" | "audio" | "duration"> & {
   artist_id?: TTrack["artist_id"];
   positionTrack?: number;
   onTogglePlay?: (track: TTogglePlay) => void;
-};
-
-const textColor = {
-  color: (theme: Theme) => theme.palette.grey[400],
-  fontSize: "14px",
-  display: "block",
-};
-
-const iconStyle = {
-  sx: { color: "#9f9f9f", width: 20, height: 20, cursor: "pointer" },
 };
 
 export const Track: FC<TListTrack> = ({
@@ -47,28 +38,31 @@ export const Track: FC<TListTrack> = ({
   artist_id,
   index,
 }) => {
-  const dispatch = useDispatch();
   const playerState = useSelector((state: RootState) => state.player);
-  const { current, list } = useSelector((state: RootState) => state.playlists);
+  const { current } = useSelector((state: RootState) => state.playlists);
 
-  const obj = { id, name, audio, artist_name, positionTrack, duration };
+  const currentTrack: TTrack = {
+    id,
+    name,
+    audio,
+    artist_name,
+    positionTrack,
+    duration,
+  };
 
   const handlePlay = () => {
     if (onTogglePlay) {
-      onTogglePlay({ ...obj, play: true });
+      onTogglePlay({ ...currentTrack, play: true });
     }
   };
 
   const onPause = () => {
-    onTogglePlay && onTogglePlay({ ...obj, play: false });
+    onTogglePlay && onTogglePlay({ ...currentTrack, play: false });
   };
 
   const isLike = useMemo(() => {
     return current?.tracks?.find((track) => track.id === id);
   }, [id, current?.tracks]);
-
-  const addTrack = () => addTrackToPlaylist(list, current, obj, dispatch);
-  const removeTrack = () => removeLikeTrack(list, current, obj.id, dispatch);
 
   return (
     <STrack>
@@ -102,11 +96,7 @@ export const Track: FC<TListTrack> = ({
       </Box>
 
       <Stack direction="row" spacing={1}>
-        {isLike?.id === id ? (
-          <ThumbUpAltIcon onClick={removeTrack} {...iconStyle} />
-        ) : (
-          <ThumbUpOffAltIcon onClick={addTrack} {...iconStyle} />
-        )}
+        {isLike?.id === id ? <RemoveLike /> : <AddLike track={currentTrack} />}
 
         {duration && (
           <Typography sx={textColor}>

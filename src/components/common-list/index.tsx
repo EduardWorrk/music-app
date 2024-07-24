@@ -11,23 +11,15 @@ import { trimText } from "@utils/index";
 import AddIcon from "@mui/icons-material/Add";
 import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 
-type TCommonList = {
-  id: string;
-  name: string;
-  date?: string;
-  image: string;
-  background?: string;
-};
-
-type Props<T extends TCommonList[]> = {
+type Props<T> = {
   newList?: boolean;
   title: string;
-  data?: T | null;
+  data?: T;
   onCallBackCreate?: (value: boolean) => void;
   onCallBack?: (id: number) => void;
 };
 
-export const CommonList: FC<Props<TCommonList[]>> = ({
+export const CommonList: FC<Props<any>> = ({
   newList,
   title,
   data,
@@ -60,7 +52,7 @@ export const CommonList: FC<Props<TCommonList[]>> = ({
           </Grid>
         )}
 
-        {data?.map((elem) => {
+        {data?.map((elem: any) => {
           return (
             <Grid
               item
@@ -71,6 +63,7 @@ export const CommonList: FC<Props<TCommonList[]>> = ({
               sx={{ minHeight: 204 }}
             >
               <StyledItemList
+                active={elem.active}
                 onClick={() => onCallBack && onCallBack(Number(elem.id))}
               >
                 <SAlbum>

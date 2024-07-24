@@ -2,6 +2,17 @@ import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { Link } from "react-router-dom";
+import { Theme } from "@mui/material/styles/createTheme";
+
+export const iconStyle = {
+  sx: { color: "#9f9f9f", width: 20, height: 20, cursor: "pointer" },
+};
+
+export const textColor = {
+  color: (theme: Theme) => theme.palette.grey[400],
+  fontSize: "14px",
+  display: "block",
+};
 
 export const SListTrack = styled(Box)(({ theme }) => ({
   background: "#1E1E1E",

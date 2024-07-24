@@ -17,13 +17,17 @@ export const SAlbum = styled(Box)(({ theme }) => ({
   overflow: "hidden",
 }));
 
-export const StyledItemList = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(1),
-  pb: theme.spacing(2),
-  background: "#1E1E1E",
-  borderRadius: 5,
-  border: "2px solid #1E1E1E",
-  "&:hover": {
-    border: `2px solid ${theme.palette.primary.main}`,
-  },
-}));
+export const StyledItemList = styled(Box)<{ active?: boolean }>(
+  ({ theme, active }) => ({
+    padding: theme.spacing(1),
+    pb: theme.spacing(2),
+    background: "#1E1E1E",
+    borderRadius: 5,
+    border: active
+      ? `2px solid ${theme.palette.primary.main}`
+      : "2px solid #1E1E1E",
+    "&:hover": {
+      border: `2px solid ${theme.palette.primary.main}`,
+    },
+  })
+);
