@@ -68,7 +68,7 @@ export const Track: FC<TListTrack> = ({
     <STrack>
       <Box alignItems="center" sx={{ display: "flex" }}>
         {index && (
-          <Box fontSize={12} color="white" sx={{ pr: 1 }}>
+          <Box fontSize={12} color="white" sx={{ pr: 2 }}>
             {index}
           </Box>
         )}

@@ -41,7 +41,7 @@ export const ListTracks: FC<Props> = ({ title, tracks, index }) => {
           {tracks?.map((track, i) => (
             <Track
               {...track}
-              index={index ? i + 1 : undefined}
+              index={i + 1}
               key={track.id}
               onTogglePlay={playTrack}
               positionTrack={Number(i)}
