@@ -43,7 +43,7 @@ export const HomePage = () => {
     },
   });
 
-  const onCallBackLinkAlbum = useCallback(
+  const getPopularAlbums = useCallback(
     (id: number) => {
       fetchAlbumTracks.mutate({ id });
       dispatch(setOpenPlaylist(false));
@@ -56,14 +56,12 @@ export const HomePage = () => {
     [navigate]
   );
 
-  console.log(tracksWeek);
-
   return (
     <Stack spacing={3}>
       <Slider
         data={albums}
         category={routes.albums}
-        onCallBack={onCallBackLinkAlbum}
+        onCallBack={getPopularAlbums}
         title="Популярные альбомы за неделю"
       />
 

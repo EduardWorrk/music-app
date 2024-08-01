@@ -3,6 +3,7 @@ import { playerSlice } from "@store/slices/player";
 import { albumSlice } from "@store/slices/album";
 import { searchSlice } from "@store/slices/search";
 import { playlistSlice } from "@store/slices/playlists";
+import { userSlice } from "@store/slices/user";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     album: albumSlice,
     search: searchSlice,
     playlists: playlistSlice,
+    user: userSlice,
     // Другие слайсы могут быть добавлены здесь
   },
 });

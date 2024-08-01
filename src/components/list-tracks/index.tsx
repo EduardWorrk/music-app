@@ -1,6 +1,5 @@
 import { FC, useCallback } from "react";
 import { Typography } from "@mui/material";
-import List from "@mui/material/List";
 import { SListTrack } from "@components/list-tracks/styles";
 import { Track, TListTrack } from "@components/list-tracks/track";
 import { useDispatch } from "react-redux";

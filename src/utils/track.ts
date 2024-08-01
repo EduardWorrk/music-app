@@ -22,9 +22,6 @@ export const removeLikeTrack = (
     );
 
     const editPlaylists = listPlaylist.map((playlist) => {
-      // if (playlist.id === currentPlaylist.id) {
-      //   return { ...playlist, tracks: newTracks };
-      // }
       return playlist;
     });
 

@@ -24,6 +24,8 @@ type Props = {
   onCallBack: (id: number) => void;
 };
 
+// TODO переписать слайдер
+
 export const Slider: FC<Props> = ({
   title,
   data,
