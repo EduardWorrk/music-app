@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/store";
 import { ListTracks } from "@components/list-tracks";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Snackbar } from "@mui/material";
 import { clearAlbum } from "@store/slices/album";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
@@ -30,10 +30,17 @@ export const PlayerDataAlbum: FC = () => {
   const { data } = useSelector((state: RootState) => state.album);
   const { list } = useSelector((state: RootState) => state.playlists);
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const onClearAlbum = () => dispatch(clearAlbum());
 
   const addAlbumToPlaylists = () => {
     dispatch(setPlaylists([data, ...list]));
+    setOpenSnackbar(true);
+  };
+
+  const onCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -55,6 +62,14 @@ export const PlayerDataAlbum: FC = () => {
       {data?.tracks && (
         <ListTracks title={data?.name ?? ""} tracks={data.tracks} />
       )}
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={onCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        message="Альбом добавлен в плейлист"
+      />
     </Box>
   );
 };
