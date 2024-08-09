@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Nullable } from "@declarations/index";
 import { TTrack } from "@declarations/tracks";
 import { getPlaylist, URL_LIKE_IMG } from "@utils/track";
 import { generatePastelColor } from "@utils/index";
 
 export type TPlaylist = Nullable<{
-  id?: string;
-  name?: string;
-  active?: boolean;
+  id: string;
+  name: string;
+  active: boolean;
   tracks: TTrack[];
   background?: string;
 }>;
@@ -15,12 +15,12 @@ export type TPlaylist = Nullable<{
 type Playlists = {
   openPlaylist: boolean;
   newPlaylist: boolean;
-  list: TPlaylist[];
+  listPlaylist: TPlaylist[] | [];
   current: Nullable<TPlaylist>;
 };
 
 const initialState: Playlists = {
-  list: [],
+  listPlaylist: [],
   current: null,
   newPlaylist: false,
   openPlaylist: false,
@@ -38,16 +38,18 @@ const playlists = createSlice({
       state.newPlaylist = action.payload;
     },
 
-    setPlaylists: (state, action) => {
-      state.list = action.payload;
+    setPlaylists: (state, action: PayloadAction<TPlaylist[]>) => {
+      state.listPlaylist = action.payload;
     },
+
+    addPlaylist: (state, action) => {},
 
     setCurrentPlayList: (state, action) => {
       state.current = action.payload;
     },
 
     deletePlaylist: (state, action) => {
-      state.list = state.list.filter(
+      state.listPlaylist = state.listPlaylist.filter(
         (playlist) => playlist?.id !== action.payload
       );
 
@@ -60,7 +62,8 @@ const playlists = createSlice({
       const tracks = state.current ? state.current.tracks : action.payload;
 
       if (state.current) {
-        state.list = state.list.map((playlist) => {
+        // @ts-ignore
+        state.listPlaylist = state.listPlaylist.map((playlist) => {
           if (playlist?.id === state.current?.id) {
             return {
               ...playlist,
@@ -75,6 +78,7 @@ const playlists = createSlice({
         };
       } else {
         const newPlaylist = getPlaylist(
+          `${state.listPlaylist.length + 1 || 1}`,
           "Мне нравится",
           [action.payload],
           URL_LIKE_IMG,
@@ -83,7 +87,7 @@ const playlists = createSlice({
         );
 
         state.current = newPlaylist;
-        state.list = [newPlaylist, ...state.list];
+        state.listPlaylist = [newPlaylist, ...state.listPlaylist];
       }
     },
   },

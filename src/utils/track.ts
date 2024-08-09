@@ -37,14 +37,15 @@ export const removeLikeTrack = (
 };
 
 export function getPlaylist(
+  id: string,
   name: string,
   tracks: TTrack[],
-  image?: string,
-  background?: string,
-  active?: boolean
+  image: string,
+  background: string,
+  active: boolean
 ) {
   return {
-    id: getRandomNumber(),
+    id,
     name,
     image,
     tracks: tracks || [],

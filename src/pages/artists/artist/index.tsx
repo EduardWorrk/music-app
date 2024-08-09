@@ -1,15 +1,15 @@
 import { FC, useCallback } from "react";
 import { useParams } from "react-router";
 import { useGetArtistAlbum } from "@queries/artists";
-import { Author } from "@pages/artists/artist/components/author";
+import { Author } from "@pages/artists/artist/author";
 import { Stack } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { albumsApi } from "@api/albums";
 import { setAlbum } from "@store/slices/album";
 import { useDispatch } from "react-redux";
-import { CommonList } from "@components/common-list";
 import { Loading } from "@components/loading";
 import { ArtistAlbums } from "@declarations/artists";
+import { List } from "@components/list";
 
 export const ArtistPage: FC = () => {
   const { id } = useParams();
@@ -42,10 +42,10 @@ export const ArtistPage: FC = () => {
       {isLoading ? (
         <Loading verticalSize={30} />
       ) : (
-        <CommonList
+        <List
           title="Список альбомов"
-          onCallBack={onCallBackIdAlbums}
           data={data?.albums || []}
+          onCallBack={onCallBackIdAlbums}
         />
       )}
     </Stack>

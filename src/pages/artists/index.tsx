@@ -1,9 +1,9 @@
 import { FC, useCallback } from "react";
 import { useGetArtists } from "@queries/artists";
 import { ArtistSortOptions } from "@api/artists";
-import { CommonList } from "@components/common-list";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "@components/loading";
+import { List } from "@components/list";
 
 export const ArtistsPage: FC = () => {
   const navigate = useNavigate();
@@ -23,11 +23,7 @@ export const ArtistsPage: FC = () => {
       {isLoading ? (
         <Loading verticalSize={30} />
       ) : (
-        <CommonList
-          onCallBack={redirectArtist}
-          title="Список артистов"
-          data={data}
-        />
+        <List onCallBack={redirectArtist} title="Список артистов" data={data} />
       )}
     </>
   );

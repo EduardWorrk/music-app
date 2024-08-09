@@ -2,7 +2,6 @@ import { FC, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/store";
-import { CommonList } from "@components/common-list";
 import { Typography } from "@mui/material";
 import {
   createPlayList,
@@ -14,42 +13,45 @@ import {
 import { clearAlbum } from "@store/slices/album";
 import { getPlaylist } from "@utils/track";
 import { generatePastelColor } from "@utils/index";
+import { PlaylistList } from "@components/list/playlist-list";
 
 export const MyMusicPage: FC = () => {
   const dispatch = useDispatch();
-  const { list, newPlaylist: playlistStore } = useSelector(
+  const { listPlaylist, newPlaylist: playlistStore } = useSelector(
     (state: RootState) => state.playlists
   );
 
   const createNewPlaylist = useCallback(() => {
-    const isActivePlaylist = list.some((elem) => elem?.active);
+    const isActivePlaylist = listPlaylist.some((elem) => elem?.active);
+
     const playlist = getPlaylist(
-      `Новый плейлист № ${list.length + 1}`,
+      `${listPlaylist.length + 1}`,
+      `Новый плейлист № ${listPlaylist.length + 1}`,
       [],
-      undefined,
+      "",
       generatePastelColor(),
-      list.length === 0 ? true : !isActivePlaylist
+      Boolean(listPlaylist.length === 0 ? true : !isActivePlaylist)
     );
 
-    dispatch(setPlaylists([playlist, ...list]));
+    dispatch(setPlaylists([playlist, ...listPlaylist]));
 
     dispatch(setCurrentPlayList(playlist));
     dispatch(createPlayList(false));
-  }, [dispatch, list]);
+  }, [dispatch, listPlaylist]);
 
   const selectPlaylist = (id: number) => {
-    const selectedPlaylist = list.find(
+    const selectedPlaylist = listPlaylist.find(
       (playlist) => Number(playlist?.id) === id
     );
 
-    const playlists = list.map((playlist: TPlaylist) => {
+    const playlists = listPlaylist.map((playlist) => {
       if (playlist?.id === selectedPlaylist?.id) {
         return { ...playlist, active: true };
       }
       return { ...playlist, active: false };
     });
 
-    dispatch(setPlaylists(playlists));
+    dispatch(setPlaylists(playlists as TPlaylist[]));
 
     dispatch(setCurrentPlayList({ active: true, ...selectedPlaylist }));
     dispatch(clearAlbum());
@@ -66,10 +68,8 @@ export const MyMusicPage: FC = () => {
         Плейлисты
       </Typography>
 
-      <CommonList
-        newList
-        title=""
-        data={list}
+      <PlaylistList
+        playlists={listPlaylist}
         onCallBack={selectPlaylist}
         onCallBackCreate={createNewPlaylist}
       />

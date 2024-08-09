@@ -7,7 +7,7 @@ import { clearAlbum } from "@store/slices/album";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
 import { Theme } from "@mui/material/styles/createTheme";
-import { setPlaylists } from "@store/slices/playlists";
+import { setPlaylists, TPlaylist } from "@store/slices/playlists";
 import CloseIcon from "@mui/icons-material/Close";
 
 const boxStyles = {
@@ -28,14 +28,14 @@ const typographyStyles = {
 export const PlayerDataAlbum: FC = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.album);
-  const { list } = useSelector((state: RootState) => state.playlists);
+  const { listPlaylist } = useSelector((state: RootState) => state.playlists);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const onClearAlbum = () => dispatch(clearAlbum());
 
   const addAlbumToPlaylists = () => {
-    dispatch(setPlaylists([data, ...list]));
+    dispatch(setPlaylists([data, ...listPlaylist] as TPlaylist[]));
     setOpenSnackbar(true);
   };
 

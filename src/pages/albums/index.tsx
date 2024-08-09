@@ -4,14 +4,14 @@ import { useMutation } from "@tanstack/react-query";
 import { albumsApi } from "@api/albums";
 import { useDispatch } from "react-redux";
 import { setAlbum } from "@store/slices/album";
-import { CommonList } from "@components/common-list";
 import { Loading } from "@components/loading";
 import { AlbumSortOptions } from "@enums/album-sort-options";
+import { List } from "@components/list";
 
 export const AlbumsPage: FC = () => {
   const dispatch = useDispatch();
 
-  const { data, isLoading } = useGetAlbums("albumsList", {
+  const { data: albums, isLoading } = useGetAlbums("albumsList", {
     limit: 50,
     order: AlbumSortOptions.Popular_total,
   });
@@ -35,10 +35,10 @@ export const AlbumsPage: FC = () => {
       {isLoading ? (
         <Loading verticalSize={30} />
       ) : (
-        <CommonList
+        <List
+          data={albums}
           title="Список альбомов"
           onCallBack={onCallBackIdAlbums}
-          data={data}
         />
       )}
     </>

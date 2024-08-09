@@ -1,13 +1,13 @@
 import { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/store";
-import { CommonList } from "@components/common-list";
 import { Stack, Typography } from "@mui/material";
 import { ListTracks } from "@components/list-tracks";
 import { useMutation } from "@tanstack/react-query";
 import { albumsApi } from "@api/albums";
 import { setAlbum } from "@store/slices/album";
 import { useNavigate } from "react-router";
+import { List } from "@components/list";
 
 function hasElements<T extends any[]>(list: T): boolean {
   return !!list.length;
@@ -59,7 +59,7 @@ export const SearchPage: FC = () => {
           )}
 
           {hasElements(albums) && (
-            <CommonList
+            <List
               onCallBack={onCallBackLinkAlbum}
               title="Найденные альбомы"
               data={albums.map((album) => ({
@@ -70,7 +70,7 @@ export const SearchPage: FC = () => {
           )}
 
           {hasElements(artists) && (
-            <CommonList
+            <List
               onCallBack={onCallBackLinkArtist}
               title="Найденные артисты"
               data={artists}

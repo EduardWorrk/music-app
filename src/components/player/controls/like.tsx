@@ -13,12 +13,12 @@ export const Like: FC = () => {
 
   const { options } = useSelector((state: RootState) => state.player);
 
-  const { current, list } = useSelector((state: RootState) => state.playlists);
+  const { current, listPlaylist } = useSelector((state: RootState) => state.playlists);
 
   const addTrack = () => {};
 
   const removeTrack = () =>
-    removeLikeTrack(list, current, options.id, dispatch);
+    removeLikeTrack(listPlaylist, current, options.id, dispatch);
 
   const isLike = useMemo(() => {
     return current?.tracks.find((track) => track.id === options.id);
