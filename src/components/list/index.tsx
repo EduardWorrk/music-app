@@ -1,14 +1,26 @@
-import { FC } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { ListItem } from "@components/list/list-item";
 
 type Props<T> = {
   title: string;
-  data?: T;
+  data?: T[];
   onCallBack: (id: number) => void;
 };
 
-export const List: FC<Props<any>> = ({ title, data, onCallBack }) => {
+type ItemList = {
+  name: string;
+  id: string;
+  active: boolean;
+  image: string;
+  background?: string;
+  date: string;
+};
+
+export const List = <T extends Partial<ItemList>>({
+  title,
+  data,
+  onCallBack,
+}: Props<T>) => {
   return (
     <Box>
       <Typography variant="h3" sx={{ mb: 2 }} color="white">
@@ -16,7 +28,7 @@ export const List: FC<Props<any>> = ({ title, data, onCallBack }) => {
       </Typography>
 
       <Grid container rowSpacing={3} spacing={2}>
-        {data?.map((elem: any) => {
+        {data?.map((elem) => {
           return (
             <Grid
               item
@@ -27,11 +39,11 @@ export const List: FC<Props<any>> = ({ title, data, onCallBack }) => {
               sx={{ minHeight: 204 }}
             >
               <ListItem
-                id={elem.id}
+                id={elem.id || ""}
                 date={elem.date}
-                active={elem.active}
-                name={elem.name}
+                name={elem.name || ""}
                 image={elem.image}
+                active={!!elem.active}
                 background={elem.background}
                 onCallBack={(id) => onCallBack(id)}
               />

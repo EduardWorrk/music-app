@@ -8,7 +8,7 @@ import { List } from "@components/list";
 export const ArtistsPage: FC = () => {
   const navigate = useNavigate();
 
-  const { data, isLoading } = useGetArtists("artistsList", {
+  const { data: artists, isLoading } = useGetArtists("artistsList", {
     limit: 25,
     order: ArtistSortOptions.PopularityTotal,
   });
@@ -23,7 +23,11 @@ export const ArtistsPage: FC = () => {
       {isLoading ? (
         <Loading verticalSize={30} />
       ) : (
-        <List onCallBack={redirectArtist} title="Список артистов" data={data} />
+        <List
+          data={artists}
+          title="Список артистов"
+          onCallBack={redirectArtist}
+        />
       )}
     </>
   );

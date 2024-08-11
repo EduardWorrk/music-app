@@ -71,9 +71,9 @@ export const SearchPage: FC = () => {
 
           {hasElements(artists) && (
             <List
-              onCallBack={onCallBackLinkArtist}
-              title="Найденные артисты"
               data={artists}
+              title="Найденные артисты"
+              onCallBack={onCallBackLinkArtist}
             />
           )}
         </Stack>
