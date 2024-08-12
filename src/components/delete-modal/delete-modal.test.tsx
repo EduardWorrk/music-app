@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DeleteModal } from ".";
-import renderer from 'react-test-renderer';
 
 describe("DeleteModal Component", () => {
   const props = {
