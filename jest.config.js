@@ -1,5 +1,12 @@
+
+
+// jest.config.js
 module.exports = {
   moduleNameMapper: {
-    "^@components/(.*)$": "C:\\work\\apps\\music-app\\components\\$1",
+    "^locales(.*)$": "<rootDir>/src/locales/$1",
   },
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+  },
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 };
