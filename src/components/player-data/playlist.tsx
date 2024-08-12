@@ -72,7 +72,7 @@ export const PlayerDataPlaylist: FC = () => {
         </Typography>
       </Box>
 
-      <ListTracks tracks={playlist?.tracks} />
+      <ListTracks visibleIndex tracks={playlist?.tracks} />
 
       <DeleteModal
         open={openModal}

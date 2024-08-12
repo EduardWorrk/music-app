@@ -60,7 +60,11 @@ export const PlayerDataAlbum: FC = () => {
       </Box>
 
       {data?.tracks && (
-        <ListTracks title={data?.name ?? ""} tracks={data.tracks} />
+        <ListTracks
+          visibleIndex
+          title={data?.name ?? ""}
+          tracks={data.tracks}
+        />
       )}
 
       <Snackbar

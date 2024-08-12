@@ -24,6 +24,7 @@ export type TListTrack = Pick<TTrack, "id" | "name" | "audio" | "duration"> & {
   artist_name?: TTrack["artist_name"];
   artist_id?: TTrack["artist_id"];
   positionTrack?: number;
+  visibleIndex?: boolean;
   onTogglePlay?: (track: TTogglePlay) => void;
 };
 
@@ -37,6 +38,7 @@ export const Track: FC<TListTrack> = ({
   positionTrack,
   artist_id,
   index,
+  visibleIndex,
 }) => {
   const playerState = useSelector((state: RootState) => state.player);
   const { current } = useSelector((state: RootState) => state.playlists);
@@ -67,7 +69,7 @@ export const Track: FC<TListTrack> = ({
   return (
     <STrack>
       <Box alignItems="center" sx={{ display: "flex" }}>
-        {index && (
+        {visibleIndex && (
           <Box fontSize={12} color="white" sx={{ pr: 2 }}>
             {index}
           </Box>
