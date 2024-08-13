@@ -57,7 +57,7 @@ export const PlayerDataAlbum: FC = () => {
         duration,
       }));
 
-      dispatch(addPlaylist({ id, name, tracks: albumTracks, active: true }));
+      dispatch(addPlaylist({ id, name, tracks: albumTracks, active: false }));
       setSnackbar((prev) => ({ ...prev, open: true }));
     }
   };
