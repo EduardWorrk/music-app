@@ -3,11 +3,11 @@ import { TAlbumWidthTracks } from "@declarations/albums";
 import { Nullable } from "@declarations/index";
 
 type TInitialState = {
-  data: Nullable<TAlbumWidthTracks>;
+  album: Nullable<TAlbumWidthTracks>;
 };
 
 const initialState: TInitialState = {
-  data: null,
+  album: null,
 };
 
 const album = createSlice({
@@ -15,11 +15,11 @@ const album = createSlice({
   initialState,
   reducers: {
     setAlbum: (state, action) => {
-      state.data = action.payload;
+      state.album = action.payload;
     },
 
     clearAlbum: (state) => {
-      state.data = null;
+      state.album = null;
     },
   },
 });

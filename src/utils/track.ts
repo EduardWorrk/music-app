@@ -3,7 +3,6 @@ import {
   setPlaylists,
   TPlaylist,
 } from "@store/slices/playlists";
-import { getRandomNumber } from "@utils/index";
 import store from "@store/store";
 import { TTrack } from "@declarations/tracks";
 

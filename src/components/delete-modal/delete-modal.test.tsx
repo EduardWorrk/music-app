@@ -20,14 +20,12 @@ describe("DeleteModal Component", () => {
 
   it("сравниваем snapshot", () => {
     // Рендерим компонент и получаем фрагмент
-    const { asFragment } = render(<DeleteModal {...props} />);
-    // Сравниваем фрагмент с ранее сохранённым снимком
-    expect(asFragment()).toMatchSnapshot();
+    const { container } = render(<DeleteModal {...props} />);
+    expect(container).toMatchSnapshot();
   });
 
   it("проверяем отображается ли заголовок и описание", () => {
     render(<DeleteModal {...props} />);
-
 
     // Проверяем, что заголовок отображается корректно
     expect(screen.getByText(props.title)).toBeInTheDocument();

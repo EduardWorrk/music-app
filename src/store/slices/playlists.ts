@@ -42,7 +42,19 @@ const playlists = createSlice({
       state.listPlaylist = action.payload;
     },
 
-    addPlaylist: (state, action) => {},
+    addPlaylist: (state, action: PayloadAction<TPlaylist>) => {
+      const currentIdPlaylist = action.payload?.id;
+
+      const isPlaylistLocal = state.listPlaylist.find(
+        (playlist) => playlist?.id === currentIdPlaylist
+      );
+
+      if (isPlaylistLocal) {
+        return;
+      }
+
+      state.listPlaylist = [...state.listPlaylist, action.payload];
+    },
 
     setCurrentPlayList: (state, action) => {
       state.current = action.payload;
@@ -94,6 +106,7 @@ const playlists = createSlice({
 });
 
 export const {
+  addPlaylist,
   setOpenPlaylist,
   createPlayList,
   setPlaylists,

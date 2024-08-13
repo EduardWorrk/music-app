@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router";
 import { SAvatar, SListItem, StyledItemList } from "@components/profile/styles";
-import { ClickAwayListener, List, ListItem } from "@mui/material";
+import { ClickAwayListener, List } from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 

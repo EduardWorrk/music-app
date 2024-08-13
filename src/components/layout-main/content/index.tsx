@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const Content: React.FC<Props> = ({ children, fullScreen }) => {
-  const { data: album } = useSelector((state: RootState) => state.album);
+  const { album } = useSelector((state: RootState) => state.album);
   const { openPlaylist } = useSelector((state: RootState) => state.playlists);
 
   return (
