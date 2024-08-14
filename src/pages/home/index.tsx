@@ -23,7 +23,7 @@ export const HomePage = () => {
   const { data: albums } = useGetAlbums("albumsPopularityMonth", {});
 
   const { data: artists } = useGetArtists("artists", {
-    order: ArtistSortOptions.JoinDate,
+    order: ArtistSortOptions.Name,
   });
 
   const { data: tracksWeek } = useGetTracks({

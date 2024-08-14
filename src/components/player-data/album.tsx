@@ -15,6 +15,7 @@ const boxStyles = {
   overflow: "auto",
   background: "#1E1E1E",
   height: "100%",
+  padding: 1,
 };
 
 const buttonGroupStyles = {
@@ -83,11 +84,7 @@ export const PlayerDataAlbum: FC = () => {
       </Box>
 
       {album?.tracks && (
-        <ListTracks
-          visibleIndex
-          title={album?.name ?? ""}
-          tracks={album.tracks}
-        />
+        <ListTracks title={album?.name ?? ""} tracks={album.tracks} />
       )}
 
       <Snackbar

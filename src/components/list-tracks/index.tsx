@@ -8,7 +8,6 @@ import { Loading } from "@components/loading";
 
 type Props = {
   title?: string;
-  visibleIndex?: boolean;
   tracks?: TListTrack[];
 };
 
@@ -17,7 +16,7 @@ export type TTogglePlay = { play?: boolean } & Pick<
   "id" | "name" | "audio" | "artist_name"
 >;
 
-export const ListTracks: FC<Props> = ({ title, tracks, visibleIndex }) => {
+export const ListTracks: FC<Props> = ({ title, tracks }) => {
   const dispatch = useDispatch();
 
   const playTrack = useCallback(
@@ -34,7 +33,7 @@ export const ListTracks: FC<Props> = ({ title, tracks, visibleIndex }) => {
       {tracks ? (
         <>
           {title && (
-            <Typography variant="h3" color="white" sx={{ padding: 2 }}>
+            <Typography variant="h3" color="white">
               {title}
             </Typography>
           )}
@@ -45,7 +44,6 @@ export const ListTracks: FC<Props> = ({ title, tracks, visibleIndex }) => {
               key={track.id}
               onTogglePlay={playTrack}
               positionTrack={Number(i)}
-              visibleIndex={visibleIndex}
             />
           ))}
         </>

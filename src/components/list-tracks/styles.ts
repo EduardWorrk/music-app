@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Theme } from "@mui/material/styles/createTheme";
 
 export const iconStyle = {
-  sx: { color: "#9f9f9f", width: 20, height: 20, cursor: "pointer" },
+  sx: { color: "white", width: 20, height: 20, cursor: "pointer" },
 };
 
 export const textColor = {
@@ -17,6 +17,7 @@ export const SListTrack = styled(Box)(({ theme }) => ({
   background: "#1E1E1E",
   borderRadius: 3,
   width: "100%",
+  padding: theme.spacing(1),
 }));
 
 export const STextAuthor = styled(Link)(({ theme }) => ({
@@ -35,21 +36,17 @@ export const STitleTrack = styled(Link)(({ theme }) => ({
 
 export const STrack = styled(Box)(({ theme }) => ({
   display: "flex",
-  alignItems: "flex-start",
+  alignItems: "center",
   justifyContent: "space-between",
-  padding: theme.spacing(1),
   border: "2px solid  #1E1E1E",
   transition: "200ms all linear",
-  "&:hover": {
-    border: `2px solid  ${theme.palette.primary.main}`,
-  },
+  height: "45px",
 }));
 
 export const SPlay = styled(Box)(({ theme }) => ({
   background: "#1E1E1E",
   borderRadius: 50,
   padding: "5px",
-  marginRight: "10px",
   width: "26px",
   height: "26px",
   border: `1px solid ${theme.palette.grey[800]}`,

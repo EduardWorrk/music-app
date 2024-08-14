@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, useMemo, useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { getMinutes, trimText } from "@utils/index";
 
@@ -24,7 +24,6 @@ export type TListTrack = Pick<TTrack, "id" | "name" | "audio" | "duration"> & {
   artist_name?: TTrack["artist_name"];
   artist_id?: TTrack["artist_id"];
   positionTrack?: number;
-  visibleIndex?: boolean;
   onTogglePlay?: (track: TTogglePlay) => void;
 };
 
@@ -38,10 +37,18 @@ export const Track: FC<TListTrack> = ({
   positionTrack,
   artist_id,
   index,
-  visibleIndex,
 }) => {
   const playerState = useSelector((state: RootState) => state.player);
+
   const { current } = useSelector((state: RootState) => state.playlists);
+
+  const [showControls, setShowControls] = useState(false);
+
+  const play = playerState.options.id === id && playerState.options.play;
+
+  const showAnimation = play && !showControls;
+
+  const showIndex = !play && !showControls;
 
   const currentTrack: TTrack = {
     id,
@@ -67,24 +74,45 @@ export const Track: FC<TListTrack> = ({
   }, [id, current?.tracks]);
 
   return (
-    <STrack>
-      <Box alignItems="center" sx={{ display: "flex" }}>
-        {visibleIndex && (
-          <Box fontSize={12} color="white" sx={{ pr: 2 }}>
-            {index}
-          </Box>
-        )}
-        {playerState.options.id === id && playerState.options.play ? (
-          <SPlay onClick={onPause}>
-            <PauseIcon {...iconStyle} />
-          </SPlay>
-        ) : (
-          <SPlay onClick={handlePlay}>
-            <PlayArrowIcon sx={{ color: "white", width: 17, height: 17 }} />
-          </SPlay>
-        )}
+    <STrack
+      onMouseOver={() => setShowControls(true)}
+      onMouseLeave={() => setShowControls(false)}
+    >
+      <Stack alignItems="center" direction="row" spacing={1}>
+        <Stack
+          spacing={2}
+          direction="row"
+          alignItems="center"
+          sx={{ width: "20px" }}
+          justifyContent="center"
+        >
+          {showAnimation && <Box fontSize={12} className="play-track" />}
 
-        <Stack spacing={1}>
+          {showIndex && (
+            <Typography
+              variant="subtitle2"
+              component="span"
+              sx={{ fontSize: "12px" }}
+              color={(theme) => theme.palette.grey[700]}
+            >
+              {index}
+            </Typography>
+          )}
+
+          <Box style={{ display: `${showControls ? "block" : "none"}` }}>
+            {play ? (
+              <SPlay onClick={onPause}>
+                <PauseIcon {...iconStyle} />
+              </SPlay>
+            ) : (
+              <SPlay onClick={handlePlay}>
+                <PlayArrowIcon {...iconStyle} />
+              </SPlay>
+            )}
+          </Box>
+        </Stack>
+
+        <Stack spacing={1} direction="row" alignItems="center">
           {name && (
             <STitleTrack to={`/track/${id}`} sx={textColor}>
               {trimText(name, 60)}
@@ -95,10 +123,14 @@ export const Track: FC<TListTrack> = ({
             <STextAuthor to={`/artist/${artist_id}`}>{artist_name}</STextAuthor>
           )}
         </Stack>
-      </Box>
+      </Stack>
 
       <Stack direction="row" spacing={1}>
-        {isLike?.id === id ? <RemoveLike id={currentTrack.id} /> : <AddLike track={currentTrack} />}
+        {isLike?.id === id ? (
+          <RemoveLike id={currentTrack.id} />
+        ) : (
+          <AddLike track={currentTrack} />
+        )}
 
         {duration && (
           <Typography sx={textColor}>

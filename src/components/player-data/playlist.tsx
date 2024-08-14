@@ -14,7 +14,7 @@ import { DeleteModal } from "@components/delete-modal";
 const boxStyles = {
   overflow: "auto",
   background: "#1E1E1E",
-  p: 2,
+  p: 1,
   height: "100%",
 };
 
@@ -72,7 +72,7 @@ export const PlayerDataPlaylist: FC = () => {
         </Typography>
       </Box>
 
-      <ListTracks visibleIndex tracks={playlist?.tracks} />
+      <ListTracks tracks={playlist?.tracks || []} />
 
       <DeleteModal
         open={openModal}
