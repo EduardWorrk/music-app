@@ -13,7 +13,9 @@ export const Like: FC = () => {
 
   const { options } = useSelector((state: RootState) => state.player);
 
-  const { current, listPlaylist } = useSelector((state: RootState) => state.playlists);
+  const { current, listPlaylist } = useSelector(
+    (state: RootState) => state.playlists
+  );
 
   const addTrack = () => {};
 

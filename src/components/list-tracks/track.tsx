@@ -98,7 +98,7 @@ export const Track: FC<TListTrack> = ({
       </Box>
 
       <Stack direction="row" spacing={1}>
-        {isLike?.id === id ? <RemoveLike /> : <AddLike track={currentTrack} />}
+        {isLike?.id === id ? <RemoveLike id={currentTrack.id} /> : <AddLike track={currentTrack} />}
 
         {duration && (
           <Typography sx={textColor}>

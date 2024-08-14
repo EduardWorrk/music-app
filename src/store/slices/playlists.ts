@@ -102,10 +102,19 @@ const playlists = createSlice({
         state.listPlaylist = [newPlaylist, ...state.listPlaylist];
       }
     },
+
+    removeTrack: (state, action: PayloadAction<{ id: string }>) => {
+      if (state.current && state.current.tracks) {
+        state.current.tracks = state.current.tracks.filter(
+          (track) => track.id !== action.payload.id
+        );
+      }
+    },
   },
 });
 
 export const {
+  removeTrack,
   addPlaylist,
   setOpenPlaylist,
   createPlayList,
