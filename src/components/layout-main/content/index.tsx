@@ -14,9 +14,12 @@ type Props = {
 export const Content: React.FC<Props> = ({ children, fullScreen }) => {
   const { album } = useSelector((state: RootState) => state.album);
   const { openPlaylist } = useSelector((state: RootState) => state.playlists);
+  const { options } = useSelector((state: RootState) => state.player);
+
+  const openPlayer = !!options.id;
 
   return (
-    <SContent fullScreen={fullScreen}>
+    <SContent openPlayer={openPlayer}>
       <Box
         className="scroll"
         sx={{ padding: (theme) => theme.spacing(3), overflowX: "auto" }}

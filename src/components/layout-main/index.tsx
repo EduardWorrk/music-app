@@ -32,7 +32,12 @@ export const LayoutMain: React.FC<Props> = ({ children }) => {
 
   return (
     <Stack
-      sx={{ maxWidth: 1440, margin: "0 auto", position: "relative" }}
+      sx={{
+        maxWidth: 1440,
+        margin: "0 auto",
+        position: "relative",
+        overflowX: "hidden",
+      }}
       direction="column"
     >
       <Box>
