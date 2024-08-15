@@ -57,7 +57,7 @@ export const HomePage = () => {
   );
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={8} sx={{ mt: 4 }}>
       <Slider
         data={albums}
         category={routes.albums}

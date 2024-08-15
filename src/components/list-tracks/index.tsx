@@ -33,7 +33,7 @@ export const ListTracks: FC<Props> = ({ title, tracks }) => {
       {tracks ? (
         <>
           {title && (
-            <Typography variant="h3" color="white">
+            <Typography variant="h3" color="white" sx={{ m: 2 }}>
               {title}
             </Typography>
           )}
