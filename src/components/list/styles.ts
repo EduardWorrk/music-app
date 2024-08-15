@@ -19,6 +19,14 @@ export const SAlbum = styled(Box)(({ theme }) => ({
   height: "100%",
 }));
 
+export const SAddPlaylist = styled(Box)(({ theme }) => ({
+  cursor: "pointer",
+  borderRadius: 5,
+  overflow: "hidden",
+  width: "100%",
+  height: "255px",
+}));
+
 export const StyledItemList = styled(Box)<{ active?: boolean }>(
   ({ theme, active }) => ({
     padding: theme.spacing(1),
