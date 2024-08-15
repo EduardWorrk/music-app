@@ -16,8 +16,7 @@ import { TTogglePlay } from "@components/list-tracks/index";
 import { TTrack } from "@declarations/tracks";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import { AddLike } from "@components/list-tracks/add-like";
-import { RemoveLike } from "@components/list-tracks/remove-like";
+import { LikeButtons } from "@components/list-tracks/like-buttons";
 
 export type TListTrack = Pick<TTrack, "id" | "name" | "audio" | "duration"> & {
   index?: number;
@@ -40,8 +39,6 @@ export const Track: FC<TListTrack> = ({
 }) => {
   const playerState = useSelector((state: RootState) => state.player);
 
-  const { current } = useSelector((state: RootState) => state.playlists);
-
   const [showControls, setShowControls] = useState(false);
 
   const play = playerState.options.id === id && playerState.options.play;
@@ -50,14 +47,16 @@ export const Track: FC<TListTrack> = ({
 
   const showIndex = !play && !showControls;
 
-  const currentTrack: TTrack = {
-    id,
-    name,
-    audio,
-    artist_name,
-    positionTrack,
-    duration,
-  };
+  const currentTrack: TTrack = useMemo(() => {
+    return {
+      id,
+      name,
+      audio,
+      artist_name,
+      positionTrack,
+      duration,
+    };
+  }, [artist_name, audio, duration, id, name, positionTrack]);
 
   const handlePlay = () => {
     if (onTogglePlay) {
@@ -68,10 +67,6 @@ export const Track: FC<TListTrack> = ({
   const onPause = () => {
     onTogglePlay && onTogglePlay({ ...currentTrack, play: false });
   };
-
-  const isLike = useMemo(() => {
-    return current?.tracks?.find((track) => track.id === id);
-  }, [id, current?.tracks]);
 
   return (
     <STrack
@@ -126,11 +121,7 @@ export const Track: FC<TListTrack> = ({
       </Stack>
 
       <Stack direction="row" spacing={1}>
-        {isLike?.id === id ? (
-          <RemoveLike id={currentTrack.id} />
-        ) : (
-          <AddLike track={currentTrack} />
-        )}
+        {showControls && <LikeButtons track={currentTrack} />}
 
         {duration && (
           <Typography sx={textColor}>
