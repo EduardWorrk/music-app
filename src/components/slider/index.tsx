@@ -4,11 +4,11 @@ import {
   SArrowLeftButton,
   SArrowRightButton,
   SSlider,
-  SSliderItem,
 } from "@components/slider/styles";
 import { Link } from "react-router-dom";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { SliderItem } from "@components/slider/slider-item";
 
 export type TSlider = {
   id: string;
@@ -34,8 +34,6 @@ export const Slider: FC<Props> = ({
   onCallBack,
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-
-  const widthItem = Number(ref?.current?.clientWidth) / 4 - 8;
 
   const [list, setList] = useState<TSlider[]>([]);
 
@@ -80,9 +78,8 @@ export const Slider: FC<Props> = ({
       <Box ref={ref} sx={{ overflow: "hidden" }}>
         <Box
           sx={{
-            width: ref?.current?.clientWidth,
-            display: "flex",
             gap: "10px",
+            display: "flex",
             justifyContent: "center",
           }}
         >
@@ -90,31 +87,21 @@ export const Slider: FC<Props> = ({
             <>
               {list?.map((item) => {
                 return (
-                  <SSliderItem
-                    key={item.id}
-                    sx={{
-                      width: widthItem,
-                      minWidth: widthItem,
-                    }}
-                    onClick={() => onCallBack(Number(item.id))}
-                  >
-                    {showName && <Box>{item.name}</Box>}
-
-                    <img
-                      style={{ width: "100%", height: "100%" }}
-                      src={item.image}
-                      alt={item.name}
-                    />
-                  </SSliderItem>
+                  <SliderItem
+                    id={item.id}
+                    showName={showName}
+                    scrImage={item.image}
+                    onCallBack={() => onCallBack(+item.id)}
+                  />
                 );
               })}
 
               <SArrowLeftButton onClick={onLeft}>
-                <ArrowLeftIcon sx={{ color: "white" }} />
+                <ArrowLeftIcon />
               </SArrowLeftButton>
 
               <SArrowRightButton onClick={onRight}>
-                <ArrowRightIcon sx={{ color: "white" }} />
+                <ArrowRightIcon />
               </SArrowRightButton>
             </>
           ) : (

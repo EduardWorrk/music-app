@@ -7,15 +7,12 @@ export const SSlider = styled(Box)(({ theme }) => ({
 }));
 
 export const SSliderItem = styled(Box)(({ theme }) => ({
-  // background: theme.palette.grey[600],
   cursor: "pointer",
   border: "2px solid #121212",
   padding: theme.spacing(1),
   pb: theme.spacing(2),
   background: "#1E1E1E",
   borderRadius: 5,
-  // width: widthS,
-  // minWidth: widthS,
 
   "&:hover": {
     border: `2px solid ${theme.palette.primary.main}`,
@@ -42,8 +39,16 @@ export const SArrowButton = styled(Box)(({ theme }) => ({
 
 export const SArrowLeftButton = styled(SArrowButton)(() => ({
   left: -10,
+
+  "& svg": {
+    fill: "white",
+  },
 }));
 
 export const SArrowRightButton = styled(SArrowButton)(() => ({
   right: -10,
+
+  "& svg": {
+    fill: "white",
+  },
 }));
