@@ -21,16 +21,17 @@ export const SSliderItem = styled(Box)(({ theme }) => ({
 
 export const SArrowButton = styled(Box)(({ theme }) => ({
   cursor: "pointer",
-  width: "48px",
-  height: "47px",
+  width: "35px",
+  height: "35px",
   borderRadius: "50%",
   background: theme.palette.grey[900],
   position: "absolute",
-  top: "50%",
+  top: "43%",
   border: `2px solid ${theme.palette.grey[500]}`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  opacity: 0.6,
 
   "&:hover": {
     background: theme.palette.grey[800],
@@ -38,7 +39,7 @@ export const SArrowButton = styled(Box)(({ theme }) => ({
 }));
 
 export const SArrowLeftButton = styled(SArrowButton)(() => ({
-  left: -10,
+  left: 5,
 
   "& svg": {
     fill: "white",
@@ -46,7 +47,7 @@ export const SArrowLeftButton = styled(SArrowButton)(() => ({
 }));
 
 export const SArrowRightButton = styled(SArrowButton)(() => ({
-  right: -10,
+  right: 5,
 
   "& svg": {
     fill: "white",

@@ -1,14 +1,14 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { Box, CircularProgress, Stack, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import {
   SArrowLeftButton,
   SArrowRightButton,
   SSlider,
 } from "@components/slider/styles";
-import { Link } from "react-router-dom";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { SliderItem } from "@components/slider/slider-item";
+import { Header } from "@components/slider/header";
 
 export type TSlider = {
   id: string;
@@ -24,7 +24,8 @@ type Props = {
   onCallBack: (id: number) => void;
 };
 
-// TODO переписать слайдер
+const DEFAULT_ITEM = 4;
+const GAP = 10;
 
 export const Slider: FC<Props> = ({
   title,
@@ -37,80 +38,68 @@ export const Slider: FC<Props> = ({
 
   const [list, setList] = useState<TSlider[]>([]);
 
+  const widthSlider = ref.current?.offsetWidth;
+
+  const widthItem = widthSlider && widthSlider / DEFAULT_ITEM - GAP;
+
+  const [position, setPosition] = useState(0);
+
   useEffect(() => {
     data && setList(data);
   }, [data]);
 
   const onLeft = () => {
-    const newElement = list[list.length - 1];
-    list.pop();
-    list.unshift(newElement);
-    setList([...list]);
+    widthItem && setPosition((prev) => prev + widthItem);
   };
 
   const onRight = () => {
-    const newElement = list[0];
-    list.shift();
-    list.push(newElement);
-    setList([...list]);
+    widthItem && setPosition((prev) => prev - widthItem);
   };
 
   return (
     <SSlider>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="h3" color="white" sx={{ mb: 2 }}>
-          {title}
-        </Typography>
-
-        <Link
-          to={category}
-          color="white"
-          style={{
-            color: "#7F838A",
-            fontSize: 14,
-            textDecoration: "none",
-          }}
-        >
-          Показать все
-        </Link>
-      </Stack>
-
-      <Box ref={ref} sx={{ overflow: "hidden" }}>
-        <Box
-          sx={{
-            gap: "10px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {data ? (
-            <>
+      {data ? (
+        <>
+          <Header title={title} link={category} />
+          <Box ref={ref} sx={{ overflow: "hidden", position: "relative" }}>
+            <Box
+              sx={{
+                gap: `${GAP}px`,
+                display: "flex",
+                width: widthSlider,
+                justifyContent: "center",
+                transition: "300ms ease",
+                transform: `translateX(${position}px)`,
+              }}
+            >
               {list?.map((item) => {
                 return (
                   <SliderItem
+                    key={item.id}
                     id={item.id}
                     showName={showName}
+                    widthItem={widthItem}
                     scrImage={item.image}
-                    onCallBack={() => onCallBack(+item.id)}
+                    onCallBack={(id) => onCallBack(+id)}
                   />
                 );
               })}
-
-              <SArrowLeftButton onClick={onLeft}>
-                <ArrowLeftIcon />
-              </SArrowLeftButton>
-
-              <SArrowRightButton onClick={onRight}>
-                <ArrowRightIcon />
-              </SArrowRightButton>
-            </>
-          ) : (
-            <Box sx={{ display: "flex", justifyContent: "center", padding: 8 }}>
-              <CircularProgress sx={{ color: "white" }} />
             </Box>
-          )}
+
+            <SArrowLeftButton onClick={onLeft}>
+              <ArrowLeftIcon />
+            </SArrowLeftButton>
+
+            <SArrowRightButton onClick={onRight}>
+              <ArrowRightIcon />
+            </SArrowRightButton>
+          </Box>
+        </>
+      ) : (
+        <Box sx={{ display: "flex", justifyContent: "center", padding: 8 }}>
+          <CircularProgress sx={{ color: "white" }} />
         </Box>
-      </Box>
+      )}
     </SSlider>
   );
 };
