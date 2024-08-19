@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ type Props = {
   title: string;
   link: string;
 };
-export const Header: FC<Props> = ({ title, link }) => {
+export const Header: FC<Props> = memo(({ title, link }) => {
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
       <Typography variant="h3" color="white" sx={{ mb: 2 }}>
@@ -15,7 +15,6 @@ export const Header: FC<Props> = ({ title, link }) => {
 
       <Link
         to={link}
-        color="white"
         style={{
           color: "#7F838A",
           fontSize: 14,
@@ -26,4 +25,4 @@ export const Header: FC<Props> = ({ title, link }) => {
       </Link>
     </Stack>
   );
-};
+});

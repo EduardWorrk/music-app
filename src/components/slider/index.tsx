@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import {
   SArrowLeftButton,
@@ -42,19 +42,30 @@ export const Slider: FC<Props> = ({
 
   const widthItem = widthSlider && widthSlider / DEFAULT_ITEM - GAP;
 
-  const [position, setPosition] = useState(0);
-
   useEffect(() => {
     data && setList(data);
   }, [data]);
 
   const onLeft = () => {
-    widthItem && setPosition((prev) => prev + widthItem);
+    const newElement = list[list.length - 1];
+    list.pop();
+    list.unshift(newElement);
+    setList([...list]);
   };
 
   const onRight = () => {
-    widthItem && setPosition((prev) => prev - widthItem);
+    const newElement = list[0];
+    list.shift();
+    list.push(newElement);
+    setList([...list]);
   };
+
+  const onCall = useCallback(
+    (id: number) => {
+      onCallBack(+id);
+    },
+    [onCallBack]
+  );
 
   return (
     <SSlider>
@@ -68,8 +79,6 @@ export const Slider: FC<Props> = ({
                 display: "flex",
                 width: widthSlider,
                 justifyContent: "center",
-                transition: "300ms ease",
-                transform: `translateX(${position}px)`,
               }}
             >
               {list?.map((item) => {
@@ -80,7 +89,7 @@ export const Slider: FC<Props> = ({
                     showName={showName}
                     widthItem={widthItem}
                     scrImage={item.image}
-                    onCallBack={(id) => onCallBack(+id)}
+                    onCallBack={onCall}
                   />
                 );
               })}
