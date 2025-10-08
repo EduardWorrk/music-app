@@ -1,22 +1,22 @@
 :root {
-  --main-blue: #0576FF
+  --main-blue: #0576ff;
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-display: swap;
-  src: url('../fonts/Inter-Regular.ttf') format('ttf')
+  src: url("../fonts/Inter-Regular.ttf") format("ttf");
 }
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-display: swap;
-  src: url('../fonts/Inter-Medium.ttf') format('ttf');
+  src: url("../fonts/Inter-Medium.ttf") format("ttf");
   font-weight: 500;
 }
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-display: swap;
-  src: url('../fonts/Inter-ExtraBold.ttf') format('ttf');
+  src: url("../fonts/Inter-ExtraBold.ttf") format("ttf");
   font-weight: 700;
 }
 button {
@@ -32,11 +32,11 @@ button {
   background: black;
 }
 
-
 /* Стилизация скролла для Mozilla Firefox */
-html, body {
-  scrollbar-color: black #252525;     /* «цвет ползунка» | «цвет полосы скроллбара» */
-  scrollbar-width: auto;  /* толщина: auto | thin | none */
+html,
+body {
+  scrollbar-color: black #252525; /* «цвет ползунка» | «цвет полосы скроллбара» */
+  scrollbar-width: auto; /* толщина: auto | thin | none */
 }
 
 .scroll::-webkit-scrollbar {

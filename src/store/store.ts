@@ -4,6 +4,7 @@ import { albumSlice } from "@store/slices/album";
 import { searchSlice } from "@store/slices/search";
 import { playlistSlice } from "@store/slices/playlists";
 import { userSlice } from "@store/slices/user";
+import { waveSliceReducer } from "@store/slices/wave";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     search: searchSlice,
     playlists: playlistSlice,
     user: userSlice,
+    wave: waveSliceReducer,
     // Другие слайсы могут быть добавлены здесь
   },
 });

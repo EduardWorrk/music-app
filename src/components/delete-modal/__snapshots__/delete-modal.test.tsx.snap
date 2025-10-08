@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteModal Component сравниваем snapshot 1`] = `<DocumentFragment />`;
+
+exports[`DeleteModal Component сравниваем с snapshot 1`] = `
+<DeleteModal
+  description="Вы уверены, что хотите удалить этот элемент?"
+  onClose={[MockFunction]}
+  onDelete={[MockFunction]}
+  open={true}
+  title="Удалить элемент"
+/>
+`;
