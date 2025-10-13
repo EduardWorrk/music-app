@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import {
   SArrowLeftButton,
@@ -35,32 +35,33 @@ export const Slider: FC<Props> = ({
   onCallBack,
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-
   const [list, setList] = useState<TSlider[]>([]);
 
   const widthSlider = ref.current?.offsetWidth;
 
-  const widthItem = widthSlider && widthSlider / DEFAULT_ITEM - GAP;
+  const widthItem = useMemo(() => {
+    return widthSlider ? widthSlider / DEFAULT_ITEM - GAP : undefined;
+  }, [widthSlider]);
 
   useEffect(() => {
     data && setList(data);
   }, [data]);
 
-  const onLeft = () => {
-    const newElement = list[list.length - 1];
-    list.pop();
-    list.unshift(newElement);
-    setList([...list]);
-  };
+  const onLeft = useCallback(() => {
+    setList((prev) => {
+      if (prev.length === 0) {
+        return prev;
+      }
+      const lastItem = prev[prev.length - 1];
+      return [lastItem, ...prev.slice(0, -1)];
+    });
+  }, []);
 
-  const onRight = () => {
-    const newElement = list[0];
-    list.shift();
-    list.push(newElement);
-    setList([...list]);
-  };
+  const onRight = useCallback(() => {
+    setList((prev) => [...prev.slice(1), prev[0]]);
+  }, []);
 
-  const onCall = useCallback(
+  const handleItemClick = useCallback(
     (id: number) => {
       onCallBack(+id);
     },
@@ -89,7 +90,7 @@ export const Slider: FC<Props> = ({
                     showName={showName}
                     widthItem={widthItem}
                     scrImage={item.image}
-                    onCallBack={onCall}
+                    onCallBack={handleItemClick}
                   />
                 );
               })}
