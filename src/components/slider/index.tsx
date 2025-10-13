@@ -14,6 +14,7 @@ export type TSlider = {
   id: string;
   name: string;
   image: string;
+  artist_name?: string;
 };
 
 type Props = {
@@ -91,6 +92,8 @@ export const Slider: FC<Props> = ({
                     widthItem={widthItem}
                     scrImage={item.image}
                     onCallBack={handleItemClick}
+                    albumName={item.name}
+                    artistName={item.artist_name}
                   />
                 );
               })}

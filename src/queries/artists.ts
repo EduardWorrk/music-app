@@ -5,6 +5,7 @@ export const useGetArtists = (key: string, params: TArtists) => {
   return useQuery({
     queryKey: [key],
     queryFn: () => artistsApi.getArtists(params),
+    refetchOnMount: "always",
   });
 };
 
@@ -19,5 +20,6 @@ export const useGetArtistAlbum = (id: number) => {
     queryFn: () => artistsApi.getArtistAlbums({ id }),
     enabled: !!id,
     retry: false,
+    refetchOnMount: "always",
   });
 };

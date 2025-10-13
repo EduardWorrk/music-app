@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 
 import { ListTracks } from "@components/list-tracks";
+import { TrendTracksGrid } from "@components/trend-tracks-grid";
 import { Stack, Box } from "@mui/material";
 import { Slider } from "@components/slider";
 import { useGetTracks } from "@queries/tracks";
@@ -40,6 +41,14 @@ export const HomePage = () => {
     boost: TrackSortOptions.PopularityTotal,
     limit: 10,
   });
+
+  const { data: trendTracks } = useGetTracks({
+    boost: TrackSortOptions.PopularityWeek, // Временно используем PopularityWeek для тестирования
+    limit: 10,
+    lang: ["ru", "en"],
+  });
+
+  console.log("trendTracks data:", trendTracks);
 
   const fetchAlbumTracks = useMutation({
     mutationFn: albumsApi.getAlbumsTrack,
@@ -117,11 +126,14 @@ export const HomePage = () => {
         />
       </Box>
 
+      <TrendTracksGrid tracks={trendTracks} title="🔥 Тренды недели" />
+
       <Slider
         data={albums}
         category={routes.albums}
         onCallBack={getPopularAlbums}
         title="Популярные альбомы за неделю"
+        showName={true}
       />
 
       <Slider
