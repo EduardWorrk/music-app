@@ -48,8 +48,6 @@ export const HomePage = () => {
     lang: ["ru", "en"],
   });
 
-  console.log("trendTracks data:", trendTracks);
-
   const fetchAlbumTracks = useMutation({
     mutationFn: albumsApi.getAlbumsTrack,
     onSuccess: (data) => {
@@ -133,7 +131,7 @@ export const HomePage = () => {
         category={routes.albums}
         onCallBack={getPopularAlbums}
         title="Популярные альбомы за неделю"
-        showName={true}
+        showName
       />
 
       <Slider

@@ -10,6 +10,7 @@ export type TParamAlbums = {
   namesearch?: string;
   fullcount?: boolean;
   order?: AlbumSortOptions;
+  offset?: number;
 };
 
 const URL = "albums";

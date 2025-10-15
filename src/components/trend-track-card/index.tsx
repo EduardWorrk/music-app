@@ -20,7 +20,6 @@ export const TrendTrackCard: FC<Props> = ({
   return (
     <STrendCard
       onClick={() => {
-        console.log("TrendTrackCard clicked, id:", id);
         onClick(Number(id));
       }}
     >

@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Menu } from "@components/layout-main/menu";
 import { CreatePlaylist } from "@components/create-playlist";
 import { SHeader } from "@components/layout-main/header/styles";
-import { AccountMenu } from "@components/profile";
 
 export const Header = () => {
   return (
@@ -21,7 +20,6 @@ export const Header = () => {
           <CreatePlaylist />
         </Stack>
       </Box>
-      <AccountMenu />
     </SHeader>
   );
 };

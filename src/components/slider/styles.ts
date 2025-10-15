@@ -12,7 +12,7 @@ export const SSliderItem = styled(Box)(({ theme }) => ({
   background: "#181818",
   borderRadius: "8px",
   transition: "all 0.3s ease",
-  
+
   "&:hover": {
     background: "#282828",
     transform: "translateY(-4px)",
