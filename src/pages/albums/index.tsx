@@ -1,4 +1,4 @@
-import { FC, useCallback } from "react";
+import { FC, useCallback, useState } from "react";
 import { useGetAlbumsInfinite } from "@queries/albums";
 import { useMutation } from "@tanstack/react-query";
 import { albumsApi } from "@api/albums";
@@ -11,6 +11,7 @@ import { InfiniteScrollTrigger } from "@components/infinite-scroll-trigger";
 
 export const AlbumsPage: FC = () => {
   const dispatch = useDispatch();
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useGetAlbumsInfinite("albumsList", {
@@ -52,6 +53,9 @@ export const AlbumsPage: FC = () => {
             data={albums}
             title="Список альбомов"
             onCallBack={onCallBackIdAlbums}
+            viewMode={viewMode}
+            showViewToggle
+            onViewChange={setViewMode}
           />
           <InfiniteScrollTrigger
             onIntersect={handleLoadMore}

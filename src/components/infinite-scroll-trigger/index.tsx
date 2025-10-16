@@ -53,4 +53,3 @@ export const InfiniteScrollTrigger: FC<Props> = ({
     </Box>
   );
 };
-
