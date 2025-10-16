@@ -15,6 +15,7 @@ export const AlbumsPage: FC = () => {
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useGetAlbumsInfinite("albumsList", {
       limit: 50,
+      hasimage: true,
       order: AlbumSortOptions.Popular_total,
     });
 

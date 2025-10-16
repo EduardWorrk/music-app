@@ -1,4 +1,4 @@
-export const AVATAR_SIZE = { width: 150, height: 150 };
+export const AVATAR_SIZE = { width: 150, height: 150, borderRadius: 2 };
 
 // убрать слэш
 export const removeSlash = (str: string): string => {

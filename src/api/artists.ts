@@ -16,6 +16,7 @@ export type TArtists = {
   limit?: number | string;
   namesearch?: string;
   fullcount?: boolean;
+  hasimage?: boolean;
 };
 
 const URL = "artists";

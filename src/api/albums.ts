@@ -11,6 +11,7 @@ export type TParamAlbums = {
   fullcount?: boolean;
   order?: AlbumSortOptions;
   offset?: number;
+  hasimage?: boolean;
 };
 
 const URL = "albums";

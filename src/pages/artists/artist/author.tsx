@@ -14,7 +14,7 @@ export const Author: FC<Props> = ({ img, name, loading }) => {
       {loading ? (
         <Skeleton variant="circular" {...AVATAR_SIZE} />
       ) : (
-        <Avatar sx={AVATAR_SIZE} src={img} />
+        <Avatar variant="square" sx={AVATAR_SIZE} src={img} />
       )}
 
       <Stack spacing={1}>

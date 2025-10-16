@@ -10,6 +10,7 @@ export const ArtistsPage: FC = () => {
 
   const { data: artists, isLoading } = useGetArtists("artistsList", {
     limit: 25,
+    hasimage: true,
     order: ArtistSortOptions.PopularityTotal,
   });
 
